@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bangalore House Price Predictor</title>
+    <style>
+        body { font-family: Arial; padding: 30px; background: #f2f2f2; }
+        .box { background: white; padding: 20px; border-radius: 10px; width: 400px; }
+        input, select, button { width: 100%; padding: 8px; margin: 8px 0; }
+        .result { color: green; font-size: 20px; font-weight: bold; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Bangalore House Price Predictor</h2>
+        <form action="/predict" method="post">
+            <input type="number" step="any" name="area" placeholder="Area in Sqft" required>
+            <input type="number" name="bhk" placeholder="BHK" required>
+            <input type="number" name="bath" placeholder="Bath" required>
+            
+            <select name="location" required>
+                {% for loc in locations %}
+                <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="submit">Predict Price</button>
+        </form>
+
+        <!-- YE WALA HISSA IMPORTANT HAI -->
+        {% if prediction != None %}
+            <div class="result">
+                The Predicted Price is: ₹ {{ prediction }} Lakhs
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
